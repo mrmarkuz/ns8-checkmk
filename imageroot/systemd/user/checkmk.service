@@ -22,6 +22,7 @@ ExecStartPre=/bin/rm -f %t/checkmk.pid %t/checkmk.pod-id
 ExecStartPre=/usr/bin/podman pod create --infra-conmon-pidfile %t/checkmk.pid \
     --pod-id-file %t/checkmk.pod-id \
     --name checkmk \
+    --network=slirp4netns:allow_host_loopback=true \
     --publish 127.0.0.1:${TCP_PORT}:5000 \
     --publish 8000:8000 \
     --replace

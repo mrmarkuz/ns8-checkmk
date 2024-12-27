@@ -21,8 +21,10 @@ ExecStartPre=-runagent discover-smarthost
 ExecStart=/usr/bin/podman run --conmon-pidfile %t/checkmk-app.pid \
     --cidfile %t/checkmk-app.ctr-id --cgroups=no-conmon \
     --pod-id-file %t/checkmk.pod-id --replace -d --name  checkmk-app \
-    --tmpfs /opt/omd/sites/cmk/tmp:uid=1000,gid=1000 \
-    --volume checkmk-app:/omd/sites:Z \
+    --ulimit nofile=1024 \
+    --cap-add=NET_ADMIN,NET_RAW,SYS_MODULE \
+    --tmpfs /opt/omd/sites/cmk/tmp \
+    --volume checkmk-app:/omd/sites:z \
     --volume /etc/localtime:/etc/localtime:ro \
     ${CHECK_MK_RAW_IMAGE}
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/checkmk-app.ctr-id -t 10
