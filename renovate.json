@@ -1,11 +1,21 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:base"],
-  "ignorePaths": ["**/ui/**", "**/.devcontainer/**"],
-  "regexManagers": [
+  "extends": [
+    "config:recommended"
+  ],
+  "ignorePaths": [
+    "**/ui/**",
+    "**/.devcontainer/**"
+  ],
+  "customManagers": [
     {
-      "fileMatch": ["build-images.sh"],
-      "matchStrings": ["docker\\.io/checkmk/check-mk-raw:(?<currentValue>[-0-9\\.a-z]+)"],
+      "customType": "regex",
+      "fileMatch": [
+        "build-images.sh"
+      ],
+      "matchStrings": [
+        "docker\\.io/checkmk/check-mk-raw:(?<currentValue>[-0-9\\.a-z]+)"
+      ],
       "datasourceTemplate": "docker",
       "depNameTemplate": "checkmk/check-mk-raw"
     }
