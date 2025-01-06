@@ -1,70 +1,29 @@
 # ns8-checkmk
 
-This is a template module for [NethServer 8](https://github.com/NethServer/ns8-core).
-To start a new module from it:
-
-1. Click on [Use this template](https://github.com/NethServer/ns8-checkmk/generate).
-   Name your repo with `ns8-` prefix (e.g. `ns8-mymodule`). 
-   Do not end your module name with a number, like ~~`ns8-baaad2`~~!
-
-1. Clone the repository, enter the cloned directory and
-   [configure your GIT identity](https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup#_your_identity)
-
-1. Rename some references inside the repo:
-   ```
-   modulename=$(basename $(pwd) | sed 's/^ns8-//') &&
-   git mv imageroot/systemd/user/checkmk.service imageroot/systemd/user/${modulename}.service &&
-   git mv imageroot/systemd/user/checkmk-app.service imageroot/systemd/user/${modulename}-app.service && 
-   git mv tests/checkmk.robot tests/${modulename}.robot &&
-   sed -i "s/checkmk/${modulename}/g" $(find .github/ * -type f) &&
-   git commit -a -m "Repository initialization"
-   ```
-
-1. Edit this `README.md` file, by replacing this section with your module
-   description
-
-1. Adjust `.github/workflows` to your needs. `clean-registry.yml` might
-   need the proper list of image names to work correctly. Unused workflows
-   can be disabled from the GitHub Actions interface.
-
-1. Commit and push your local changes
+[CheckMK](https://checkmk.com/) is an IT monitoring platform.
 
 ## Install
 
-Instantiate the module with:
+Install via Software Center by adding my repo as explained [here](https://repo.mrmarkuz.com)
 
-    add-module ghcr.io/nethserver/checkmk:latest 1
+Install via CLI:
+
+    add-module ghcr.io/mrmarkuz/checkmk:latest 1
 
 The output of the command will return the instance name.
 Output example:
 
-    {"module_id": "checkmk1", "image_name": "checkmk", "image_url": "ghcr.io/nethserver/checkmk:latest"}
+    {"module_id": "checkmk1", "image_name": "checkmk", "image_url": "ghcr.io/mrmarkuz/checkmk:latest"}
 
 ## Configure
 
-Let's assume that the mattermost instance is named `checkmk1`.
+Configure the FQDN in the app settings.
 
-Launch `configure-module`, by setting the following parameters:
-- `host`: a fully qualified domain name for the application
-- `http2https`: enable or disable HTTP to HTTPS redirection (true/false)
-- `lets_encrypt`: enable or disable Let's Encrypt certificate (true/false)
-
-
-Example:
+Point your browser to the FQDN and login with username cmkadmin and the password that you can find in the logs. There should be a line like:
 
 ```
-api-cli run configure-module --agent module/checkmk1 --data - <<EOF
-{
-  "host": "checkmk.domain.com",
-  "http2https": true,
-  "lets_encrypt": false
-}
-EOF
+The admin user for the web applications is cmkadmin with password: ZjBNu8wmFR5C
 ```
-
-The above command will:
-- start and configure the checkmk instance
-- configure a virtual host for trafik to access the instance
 
 ## Get the configuration
 You can retrieve the configuration with
