@@ -19,5 +19,14 @@
       "datasourceTemplate": "docker",
       "depNameTemplate": "checkmk/check-mk-raw"
     }
+  ],
+  "packageRules": [
+    {
+      "matchPackageNames": [
+        "checkmk/check-mk-raw"
+      ],
+      "allowedVersions": "< 3.4.0p0",
+      "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)p(?<revision>\\d+)$"
+    }    
   ]
 }
