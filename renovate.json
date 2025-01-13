@@ -14,7 +14,7 @@
         "build-images.sh"
       ],
       "matchStrings": [
-        "docker\\.io/checkmk/check-mk-raw:(?<currentValue>[-0-9\\.a-z]+)"
+        "docker\\.io/checkmk/check-mk-raw:(?<currentValue>[^\\s]+)"
       ],
       "datasourceTemplate": "docker",
       "depNameTemplate": "checkmk/check-mk-raw"
