@@ -39,7 +39,7 @@ buildah config --entrypoint=/ \
     --label="org.nethserver.authorizations=node:fwadm traefik@any:routeadm" \
     --label="org.nethserver.tcp-ports-demand=1" \
     --label="org.nethserver.rootfull=0" \
-    --label="org.nethserver.images=docker.io/checkmk/check-mk-raw:2.3.0-2025.01.05" \
+    --label="org.nethserver.images=docker.io/checkmk/check-mk-raw:2.3.0p23" \
     "${container}"
 # Commit the image
 buildah commit "${container}" "${repobase}/${reponame}"
