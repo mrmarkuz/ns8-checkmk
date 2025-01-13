@@ -14,7 +14,7 @@
         "build-images.sh"
       ],
       "matchStrings": [
-        "docker\\.io/checkmk/check-mk-raw:(?<currentValue>[^\\s]+)"
+        "docker\\.io/checkmk/check-mk-raw:(?<currentValue>[^\\s]+)\""
       ],
       "datasourceTemplate": "docker",
       "depNameTemplate": "checkmk/check-mk-raw"
@@ -26,7 +26,7 @@
         "checkmk/check-mk-raw"
       ],
       "allowedVersions": "< 2.4",
-      "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)p(?<revision>\\d+)$"
+      "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)p(?<revision>\\d+)"
     }    
   ]
 }
