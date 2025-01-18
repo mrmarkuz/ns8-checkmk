@@ -22,5 +22,9 @@ config["host"] = os.getenv("TRAEFIK_HOST","")
 config["http2https"] = os.getenv("TRAEFIK_HTTP2HTTPS") == "True"
 config["lets_encrypt"] = os.getenv("TRAEFIK_LETS_ENCRYPT") == "True"
 
+# Mail relay host for sending mails from checkmk
+config["mail_relay_host"] = os.getenv("MAIL_RELAY_HOST","")
+
+
 # Dump the configuration to stdout
 json.dump(config, fp=sys.stdout)

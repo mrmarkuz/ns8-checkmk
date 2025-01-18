@@ -15,7 +15,8 @@
         "test_field": "Testfeld",
         "configure_instance": "{instance} konfigurieren",
         "save": "Speichern",
-        "title": "Einstellungen"
+        "title": "Einstellungen",
+        "checkmk_relay": "Mail-Relay Server"
     },
     "common": {
         "required": "erforderlich",

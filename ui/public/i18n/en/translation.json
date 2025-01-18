@@ -31,6 +31,7 @@
     "checkmk_fqdn": "checkmk hostname (FQDN)",
     "lets_encrypt": "Request LE Certificate",
     "http_to_https": "Force HTTPS",
+    "checkmk_relay": "Mail relay host",
     "enabled": "Enabled",
     "disabled": "Disabled",
     "advanced": "Advanced",

@@ -61,6 +61,18 @@
                 $t("settings.enabled")
               }}</template>
             </cv-toggle>
+
+            <cv-text-input
+              :label="$t('settings.checkmk_relay')"
+              placeholder="mail.example.org"
+              v-model.trim="mail_relay_host"
+              class="mg-bottom"
+              :invalid-message="$t(error.mail_relay_host)"
+              :disabled="loading.getConfiguration || loading.configureModule"
+              ref="mail_relay_host"
+            >
+            </cv-text-input>
+
               <!-- advanced options -->
             <cv-accordion ref="accordion" class="maxwidth mg-bottom">
               <cv-accordion-item :open="toggleAccordion[0]">
@@ -125,6 +137,7 @@ export default {
       host: "",
       isLetsEncryptEnabled: false,
       isHttpToHttpsEnabled: true,
+      mail_relay_host: "",
       loading: {
         getConfiguration: false,
         configureModule: false,
@@ -135,6 +148,7 @@ export default {
         host: "",
         lets_encrypt: "",
         http2https: "",
+        mail_relay_host: "",
       },
     };
   },
@@ -202,6 +216,7 @@ export default {
       this.host = config.host;
       this.isLetsEncryptEnabled = config.lets_encrypt;
       this.isHttpToHttpsEnabled = config.http2https;
+      this.mail_relay_host = config.mail_relay_host;
 
       this.loading.getConfiguration = false;
       this.focusElement("host");
@@ -218,6 +233,7 @@ export default {
         }
         isValidationOk = false;
       }
+      
       return isValidationOk;
     },
     configureModuleValidationFailed(validationErrors) {
@@ -271,6 +287,7 @@ export default {
             host: this.host,
             lets_encrypt: this.isLetsEncryptEnabled,
             http2https: this.isHttpToHttpsEnabled,
+            mail_relay_host: this.mail_relay_host,
           },
           extra: {
             title: this.$t("settings.instance_configuration", {

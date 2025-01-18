@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2022 Nethesis S.r.l.
+# Copyright (C) 2025 Nethesis S.r.l.
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
 
@@ -22,9 +22,6 @@ ExecStartPre=/bin/rm -f %t/checkmk.pid %t/checkmk.pod-id
 ExecStartPre=/usr/bin/podman pod create --infra-conmon-pidfile %t/checkmk.pid \
     --pod-id-file %t/checkmk.pod-id \
     --name checkmk \
-    --network=slirp4netns:allow_host_loopback=true \
-    --publish 127.0.0.1:${TCP_PORT}:5000 \
-    --publish 8000:8000 \
     --replace
 ExecStart=/usr/bin/podman pod start --pod-id-file %t/checkmk.pod-id
 ExecStop=/usr/bin/podman pod stop --ignore --pod-id-file %t/checkmk.pod-id -t 10

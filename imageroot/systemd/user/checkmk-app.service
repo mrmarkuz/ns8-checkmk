@@ -17,14 +17,19 @@ Restart=always
 TimeoutStopSec=70
 ExecStartPre=/bin/rm -f %t/checkmk-app.pid %t/checkmk-app.ctr-id
 ExecStartPre=-runagent discover-smarthost
-ExecStart=/usr/bin/podman run --conmon-pidfile %t/checkmk-app.pid \
+ExecStart=/usr/bin/podman run --rm --conmon-pidfile %t/checkmk-app.pid \
     --cidfile %t/checkmk-app.ctr-id --cgroups=no-conmon \
     --pod-id-file %t/checkmk.pod-id --replace -d --name  checkmk-app \
-    --ulimit nofile=1024 \
+    --publish 127.0.0.1:${TCP_PORT}:5000 \
+    --publish 8000:8000 \
+    --network=slirp4netns:allow_host_loopback=true \
+#    --tmpfs /opt/omd/sites/cmk/tmp:rw,mode=1777 \
+#    --ulimit nofile=1024 \
     --cap-add=NET_ADMIN,NET_RAW,SYS_MODULE \
-    --tmpfs /opt/omd/sites/cmk/tmp \
-    --volume checkmk-app:/omd/sites:z \
+    --volume checkmk-app:/omd/sites:Z \
     --volume /etc/localtime:/etc/localtime:ro \
+    --env CMK_PASSWORD=cmkadmin \
+    --env MAIL_RELAY_HOST=${MAIL_RELAY_HOST} \
     ${CHECK_MK_RAW_IMAGE}
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/checkmk-app.ctr-id -t 10
 ExecReload=/usr/bin/podman kill -s HUP checkmk-app
