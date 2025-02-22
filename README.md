@@ -1,61 +1,26 @@
 # ns8-checkmk
 
-[CheckMK](https://checkmk.com/) is an IT monitoring platform.
+[CheckMK](https://checkmk.com) is an IT monitoring platform.
 
 ## Install
 
 Install via Software Center by adding my repo as explained [here](https://repo.mrmarkuz.com)
 
-Install via CLI:
-
-    add-module ghcr.io/mrmarkuz/checkmk:latest 1
-
-The output of the command will return the instance name.
-Output example:
-
-    {"module_id": "checkmk1", "image_name": "checkmk", "image_url": "ghcr.io/mrmarkuz/checkmk:latest"}
-
 ## Configure
 
 Configure the FQDN in the app settings.
 
-Point your browser to the FQDN and login with username cmkadmin and the password that you can find in the logs. There should be a line like:
+Point your browser to the FQDN and login with username cmkadmin and the password cmkadmin.
 
-```
-The admin user for the web applications is cmkadmin with password: ZjBNu8wmFR5C
-```
+## Documentation
 
-## Get the configuration
-You can retrieve the configuration with
-
-```
-api-cli run get-configuration --agent module/checkmk1
-```
+- [CheckMK Documentation](https://docs.checkmk.com)
 
 ## Uninstall
 
 To uninstall the instance:
 
     remove-module --no-preserve checkmk1
-
-## Smarthost setting discovery
-
-Some configuration settings, like the smarthost setup, are not part of the
-`configure-module` action input: they are discovered by looking at some
-Redis keys.  To ensure the module is always up-to-date with the
-centralized [smarthost
-setup](https://nethserver.github.io/ns8-core/core/smarthost/) every time
-checkmk starts, the command `bin/discover-smarthost` runs and refreshes
-the `state/smarthost.env` file with fresh values from Redis.
-
-Furthermore if smarthost setup is changed when checkmk is already
-running, the event handler `events/smarthost-changed/10reload_services`
-restarts the main module service.
-
-See also the `systemd/user/checkmk.service` file.
-
-This setting discovery is just an example to understand how the module is
-expected to work: it can be rewritten or discarded completely.
 
 ## Debug
 
@@ -111,20 +76,3 @@ you can run a shell inside the container
 podman exec -ti   checkmk-app sh
 / # 
 ```
-## Testing
-
-Test the module using the `test-module.sh` script:
-
-
-    ./test-module.sh <NODE_ADDR> ghcr.io/nethserver/checkmk:latest
-
-The tests are made using [Robot Framework](https://robotframework.org/)
-
-## UI translation
-
-Translated with [Weblate](https://hosted.weblate.org/projects/ns8/).
-
-To setup the translation process:
-
-- add [GitHub Weblate app](https://docs.weblate.org/en/latest/admin/continuous.html#github-setup) to your repository
-- add your repository to [hosted.weblate.org]((https://hosted.weblate.org) or ask a NethServer developer to add it to ns8 Weblate project
