@@ -26,7 +26,7 @@ ExecStart=/usr/bin/podman run --rm --conmon-pidfile %t/checkmk-app.pid \
 #    --tmpfs /opt/omd/sites/cmk/tmp:rw,mode=1777 \
 #    --ulimit nofile=1024 \
     --cap-add=NET_ADMIN,NET_RAW,SYS_MODULE \
-    --volume checkmk-app:/omd/sites:Z \
+    --volume checkmk-app:/omd/sites:z \
     --volume /etc/localtime:/etc/localtime:ro \
     --env CMK_PASSWORD=cmkadmin \
     --env MAIL_RELAY_HOST=${MAIL_RELAY_HOST} \
