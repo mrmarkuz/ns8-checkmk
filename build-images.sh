@@ -40,7 +40,7 @@ buildah config --entrypoint=/ \
     --label="org.nethserver.tcp-ports-demand=1" \
     --label="org.nethserver.rootfull=0" \
 	--label="org.nethserver.min-core=3.12.4-0" \
-    --label="org.nethserver.images=docker.io/checkmk/check-mk-raw:2.4.0p33" \
+    --label="org.nethserver.images=docker.io/checkmk/check-mk-raw:2.4.0p34" \
     "${container}"
 # Commit the image
 buildah commit "${container}" "${repobase}/${reponame}"
