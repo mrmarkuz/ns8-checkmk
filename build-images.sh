@@ -21,7 +21,7 @@ container=$(buildah from scratch)
 # Reuse existing nodebuilder-checkmk container, to speed up builds
 if ! buildah containers --format "{{.ContainerName}}" | grep -q nodebuilder-checkmk; then
     echo "Pulling NodeJS runtime..."
-    buildah from --name nodebuilder-checkmk -v "${PWD}:/usr/src:Z" docker.io/library/node:24.22.3
+    buildah from --name nodebuilder-checkmk -v "${PWD}:/usr/src:Z" docker.io/library/node:26.13.1
 fi
 
 echo "Build static UI files with node..."
