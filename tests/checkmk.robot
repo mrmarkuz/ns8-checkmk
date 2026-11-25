@@ -45,7 +45,7 @@ Check if checkmk can be configured
     Should Be Equal As Integers    ${rc}  0
 
 Check if checkmk works as expected
-    ${rc} =    Execute Command    curl -f sleep 60 && curl -H "Host: checkmk.domain.test" -fkL https://127.0.0.1/cmk/check_mk/
+    ${rc} =    Execute Command    sleep 60 && curl -H "Host: checkmk.domain.test" -fkL https://127.0.0.1/cmk/check_mk/
     ...    return_rc=True  return_stdout=False
     Should Be Equal As Integers    ${rc}  0
 
